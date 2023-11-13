@@ -25,7 +25,6 @@ const add = async (req, res) => {
 
 const updateById = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   const result = await contactService.updateContact(id, req.body);
   if (!result) {
     throw HttpError(404, `Contact with id=${id} not found`);
