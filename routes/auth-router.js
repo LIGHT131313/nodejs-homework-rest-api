@@ -9,6 +9,7 @@ import { validateBody } from "../decorators/index.js";
 import {
   userRegisterSchema,
   userLoginSchema,
+  userSubscriptionSchema,
 } from "../utils/validation/userValidationSchemas.js";
 
 const authRouter = express.Router();
@@ -30,5 +31,13 @@ authRouter.post(
 authRouter.get("/current", authenticate, authController.getCurrent);
 
 authRouter.post("/logout", authenticate, authController.logout);
+
+authRouter.patch(
+  "/subscription",
+  authenticate,
+  isEmptyBody,
+  validateBody(userSubscriptionSchema),
+  authController.subscription
+);
 
 export default authRouter;

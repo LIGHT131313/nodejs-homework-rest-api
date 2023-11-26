@@ -65,9 +65,21 @@ const logout = async (req, res) => {
   res.status(204).json();
 };
 
+const subscription = async (req, res) => {
+  const { email } = req.user;
+
+  const result = await User.findOneAndUpdate({ email }, req.body);
+
+  res.json({
+    email: result.email,
+    subscription: result.subscription,
+  });
+};
+
 export default {
   register: ctrlWrapper(register),
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
+  subscription: ctrlWrapper(subscription),
 };

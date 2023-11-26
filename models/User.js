@@ -1,7 +1,10 @@
 import { Schema, model } from "mongoose";
 
 import { handleSaveError, preUpdate } from "./hooks.js";
-import { emailRegexp } from "../utils/validation/userValidationSchemas.js";
+import {
+  emailRegexp,
+  subscriptionList,
+} from "../utils/validation/userValidationSchemas.js";
 
 const userSchema = new Schema(
   {
@@ -18,7 +21,7 @@ const userSchema = new Schema(
     },
     subscription: {
       type: String,
-      enum: ["starter", "pro", "business"],
+      enum: subscriptionList,
       default: "starter",
     },
     token: String,
