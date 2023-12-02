@@ -34,9 +34,35 @@ describe("test /users/login route", () => {
     expect(body.token).toBe(user.token);
 
     expect(body.user.email).toBe(user.email);
-    expect(typeof body.user.email).toBe("string");
-
     expect(body.user.subscription).toBe(user.subscription);
-    expect(typeof body.user.subscription).toBe("string");
+    expect(typeof body.user.email && typeof body.user.subscription).toBe(
+      "string"
+    );
+  });
+
+  test("test /users/login with incorrect Email", async () => {
+    const loginData = {
+      email: "user1@gmail.com",
+      password: "123456",
+    };
+
+    const { statusCode } = await request(app)
+      .post("/users/login")
+      .send(loginData);
+
+    expect(statusCode).toBe(401);
+  });
+
+  test("test /users/login with incorrect Password", async () => {
+    const loginData = {
+      email: "user@gmail.com",
+      password: "1234567",
+    };
+
+    const { statusCode } = await request(app)
+      .post("/users/login")
+      .send(loginData);
+
+    expect(statusCode).toBe(401);
   });
 });
