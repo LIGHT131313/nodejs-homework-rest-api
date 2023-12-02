@@ -18,7 +18,7 @@ describe("test /users/login route", () => {
     server.close();
   });
 
-  test("test /users/login with correctData", async () => {
+  test("test /users/login with correct Data", async () => {
     const loginData = {
       email: "user@gmail.com",
       password: "123456",
@@ -64,5 +64,35 @@ describe("test /users/login route", () => {
       .send(loginData);
 
     expect(statusCode).toBe(401);
+  });
+
+  test("test /users/login with empty Data", async () => {
+    const loginData = {};
+
+    const { statusCode } = await request(app)
+      .post("/users/login")
+      .send(loginData);
+
+    expect(statusCode).toBe(400);
+  });
+
+  test("test /users/login with empty Email", async () => {
+    const loginData = { password: "123456" };
+
+    const { statusCode } = await request(app)
+      .post("/users/login")
+      .send(loginData);
+
+    expect(statusCode).toBe(400);
+  });
+
+  test("test /users/login with empty Password", async () => {
+    const loginData = { email: "user@gmail.com" };
+
+    const { statusCode } = await request(app)
+      .post("/users/login")
+      .send(loginData);
+
+    expect(statusCode).toBe(400);
   });
 });
