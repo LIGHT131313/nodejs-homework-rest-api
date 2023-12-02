@@ -35,6 +35,9 @@ const add = async (req, res) => {
   const { _id: owner } = req.user;
   const { url: avatarURL } = await cloudinary.uploader.upload(req.file.path, {
     folder: "contact_avatars",
+    width: 250,
+    height: 250,
+    crop: "pad",
   });
   await fs.unlink(req.file.path);
 
