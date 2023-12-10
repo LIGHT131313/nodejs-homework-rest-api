@@ -20,7 +20,7 @@ describe("test /users/login route", () => {
 
   test("test /users/login with correct Data", async () => {
     const loginData = {
-      email: "user@gmail.com",
+      email: "niloyow807@newcupon.com",
       password: "123456",
     };
 
@@ -55,7 +55,7 @@ describe("test /users/login route", () => {
 
   test("test /users/login with incorrect Password", async () => {
     const loginData = {
-      email: "user@gmail.com",
+      email: "niloyow807@newcupon.com",
       password: "1234567",
     };
 
@@ -87,7 +87,7 @@ describe("test /users/login route", () => {
   });
 
   test("test /users/login with empty Password", async () => {
-    const loginData = { email: "user@gmail.com" };
+    const loginData = { email: "niloyow807@newcupon.com" };
 
     const { statusCode } = await request(app)
       .post("/users/login")
